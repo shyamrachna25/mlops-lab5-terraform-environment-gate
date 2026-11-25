@@ -1,6 +1,7 @@
 # MLOps Lab 5: Terraform, Meridian-Shaped GCP Infrastructure with an Environment Gate
 
 **Course:** DADS 7305, MLOps, Northeastern University
+
 **Original lab:** [`raminmohammadi/MLOps/Labs/Terraform_Labs/GCP/Lab1_Beginner`](https://github.com/raminmohammadi/MLOps/tree/main/Labs/Terraform_Labs/GCP/Lab1_Beginner)
 
 ## Overview
