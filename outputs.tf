@@ -20,5 +20,5 @@ output "snapshots_bucket" {
 
 output "sql_instance_connection_name" {
   description = "Cloud SQL connection name. Empty string in \"dev\" (count = 0, no instance provisioned)."
-  value       = var.environment == "production" ? google_sql_database_instance.db[0].connection_name : "(not provisioned in dev — see environment variable)"
+  value = var.environment == "production" ? google_sql_database_instance.db[0].connection_name : "(not provisioned in dev, see environment variable)"
 }
