@@ -1,0 +1,48 @@
+$ terraform apply
+
+[... same 13-resource plan as plan-dev.txt ...]
+
+Do you want to perform these actions?
+  Enter a value: yes
+
+random_id.bucket_suffix: Creating...
+random_id.bucket_suffix: Creation complete after 0s [id=OZqhYg]
+google_project_service.apis["iam.googleapis.com"]: Creating...
+google_project_service.apis["storage.googleapis.com"]: Creating...
+google_project_service.apis["cloudscheduler.googleapis.com"]: Creating...
+google_project_service.apis["run.googleapis.com"]: Creating...
+google_service_account.scheduler_invoker: Creating...
+google_project_service.apis["sqladmin.googleapis.com"]: Creating...
+google_project_service.apis["storage.googleapis.com"]: Creation complete after 3s [id=lateral-diagram-450610-c6/storage.googleapis.com]
+google_service_account.scheduler_invoker: Creation complete after 11s [id=projects/lateral-diagram-450610-c6/serviceAccounts/lab5-scheduler-invoker@lateral-diagram-450610-c6.iam.gserviceaccount.com]
+google_project_service.apis["sqladmin.googleapis.com"]: Creation complete after 21s [id=lateral-diagram-450610-c6/sqladmin.googleapis.com]
+google_project_service.apis["run.googleapis.com"]: Creation complete after 21s [id=lateral-diagram-450610-c6/run.googleapis.com]
+google_project_service.apis["cloudscheduler.googleapis.com"]: Creation complete after 21s [id=lateral-diagram-450610-c6/cloudscheduler.googleapis.com]
+google_project_service.apis["iam.googleapis.com"]: Creation complete after 21s [id=lateral-diagram-450610-c6/iam.googleapis.com]
+google_storage_bucket.snapshots: Creating...
+google_cloud_run_v2_job.pipeline: Creating...
+google_cloud_run_v2_service.api: Creating...
+google_storage_bucket.snapshots: Creation complete after 1s [id=mlops-lab5-snapshots-399aa162]
+google_cloud_run_v2_service.api: Creation complete after 11s [id=projects/lateral-diagram-450610-c6/locations/us-central1/services/lab5-api]
+google_cloud_run_v2_service_iam_member.api_public: Creating...
+google_cloud_run_v2_job.pipeline: Creation complete after 11s [id=projects/lateral-diagram-450610-c6/locations/us-central1/jobs/lab5-pipeline]
+google_cloud_run_v2_job_iam_member.scheduler_can_run: Creating...
+google_cloud_run_v2_service_iam_member.api_public: Creation complete after 4s [id=projects/lateral-diagram-450610-c6/locations/us-central1/services/lab5-api/roles/run.invoker/allUsers]
+google_cloud_run_v2_job_iam_member.scheduler_can_run: Creation complete after 4s [id=projects/lateral-diagram-450610-c6/locations/us-central1/jobs/lab5-pipeline/roles/run.invoker/serviceAccount:lab5-scheduler-invoker@lateral-diagram-450610-c6.iam.gserviceaccount.com]
+google_cloud_scheduler_job.daily_pipeline_trigger: Creating...
+google_cloud_scheduler_job.daily_pipeline_trigger: Creation complete after 9s [id=projects/lateral-diagram-450610-c6/locations/us-central1/jobs/lab5-daily-pipeline-trigger]
+
+Apply complete! Resources: 13 added, 0 changed, 0 destroyed.
+
+Outputs:
+
+api_url = "https://lab5-api-qx4lv5mpka-uc.a.run.app"
+pipeline_job_name = "lab5-pipeline"
+scheduler_job_name = "lab5-daily-pipeline-trigger"
+snapshots_bucket = "mlops-lab5-snapshots-399aa162"
+sql_instance_connection_name = "(not provisioned in dev — see environment variable)"
+
+# Confirmed live: api_url loaded Google's "It's running! Congratulations,
+# you successfully deployed a container image to Cloud Run" page in a
+# browser, proving this is real, reachable infrastructure, not just a
+# successful API call.

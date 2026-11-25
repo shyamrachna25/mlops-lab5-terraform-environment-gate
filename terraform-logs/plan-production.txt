@@ -1,0 +1,59 @@
+$ terraform plan
+(with environment = "production" in terraform.tfvars)
+
+Terraform will perform the following actions:
+
+  # google_sql_database.app_db[0] will be created
+  + resource "google_sql_database" "app_db" {
+      + instance = "lab5-db-399aa162"
+      + name     = "lab5_app"
+      ...
+    }
+
+  # google_sql_database_instance.db[0] will be created
+  + resource "google_sql_database_instance" "db" {
+      + database_version = "POSTGRES_15"
+      + name             = "lab5-db-399aa162"
+      + region           = "us-central1"
+      + settings {
+          + tier = "db-f1-micro"
+          ...
+        }
+      ...
+    }
+
+  # google_sql_user.app_user[0] will be created
+  + resource "google_sql_user" "app_user" {
+      + instance = "lab5-db-399aa162"
+      + name     = "lab5_app_user"
+      + password = (sensitive value)
+      ...
+    }
+
+  # google_storage_bucket.snapshots will be updated in-place
+  ~ resource "google_storage_bucket" "snapshots" {
+      ~ effective_labels = {
+          ~ "environment" = "dev" -> "production"
+        }
+      ...
+    }
+
+  # random_password.db_password[0] will be created
+  + resource "random_password" "db_password" {
+      + length  = 24
+      + special = true
+      ...
+    }
+
+Plan: 4 to add, 1 to change, 0 to destroy.
+
+Changes to Outputs:
+  ~ sql_instance_connection_name = "(not provisioned in dev — see environment variable)" -> (known after apply)
+
+NOTE: exactly the 4 Cloud SQL resources that were absent from plan-dev.txt
+now appear here — google_sql_database_instance.db[0], google_sql_database.app_db[0],
+google_sql_user.app_user[0], and random_password.db_password[0]. The only
+other change (the bucket's "environment" label) is incidental, confirming
+the environment variable threads through the whole config correctly.
+This plan was NOT applied — Cloud SQL costs real money per hour, and the
+plan output alone is sufficient evidence the gate works in both directions.

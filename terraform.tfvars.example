@@ -1,0 +1,13 @@
+# Copy this file to terraform.tfvars and fill in your own values.
+# terraform.tfvars is gitignored — never commit your real project_id or
+# any secrets to the repo.
+
+project_id = "your-gcp-project-id"
+region     = "us-central1"
+environment = "dev"   # change to "production" to also provision Cloud SQL
+
+# Defaults below are fine for a first run — using GCP's own public
+# "hello" sample image, so you don't need a real container pushed yet
+# just to prove the infrastructure provisions correctly.
+# api_image      = "us-docker.pkg.dev/cloudrun/container/hello"
+# pipeline_image = "us-docker.pkg.dev/cloudrun/container/hello"
